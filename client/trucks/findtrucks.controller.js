@@ -1,8 +1,14 @@
 angular.module('finder.trucks', ['uiGmapgoogle-maps'])
 
-.controller('FindtrucksController', function ($scope, $location, Truckdata) {
+.controller('FindtrucksController', function ($scope, $location, Truckdata, $state) {
   var longitude;
   var latitude;
+  $scope.isLoggedIn = localStorage.getItem('token') ? true : false;
+
+  $scope.logout = function() {
+    localStorage.removeItem('token');
+    $state.reload();
+  }
 
 
 $scope.hiddenDiv = false;

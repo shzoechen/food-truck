@@ -1,33 +1,16 @@
-<!-- header -->
-<md-toolbar class="header">
-  <div layout="row">
-  <h2>Foody</h2>
-  <span flex></span>
-  <input class="inputBox">
-
-
-  <md-button class="md-raised header-button">
-    <ng-md-icon icon="search" style="fill: black" size="30px"></ng-md-icon> 
-  </md-button>
-  <span flex></span>
-
-  <md-button class="md-raised header-button" ui-sref= "signin">Sign In</md-button>
-  <md-button class="md-raised header-button" ui-sref= "trucks">Log Out</md-button>
-
-  </div>
-</md-toolbar>
-
+<div ng-include src="'../layout/header.html'"></div>
 
 <md-content layout="row" flex="80" class="main" layout-padding>
 
   <!-- trucks portfolio -->
   <div flex="60" class="main-box">
     <div layout="row" ng-repeat="truck in trucks" class="portfolio">
-      <div flex="30">
-        <img src="{{truck.image}}" class="truck-image">
+      <div flex="20">
+        <a ui-sref="truck({username: {{truck.username}} })"><img src="{{truck.image}}" class="truck-image"></a>
       </div>
       <div>
         <p>{{truck.name}}</p>
+        <p>{{truck.username}}</p>
         <p>{{truck.currentAddress}}</p>
         <p>
           <ng-md-icon icon="location_on" size="16px"></ng-md-icon>
@@ -49,39 +32,3 @@
   </md-content>
 </md-content>
 
-	<!-- <div layout layout-wrap layout-sm="column" layout-xs="column" style="min-height:100vh" layout-align="center" >
-
-
-<div id="map_canvas">
-  <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-    <ui-gmap-markers models="Markers" coords="'self'" icon="icon">
-    </ui-gmap-markers>
-    <ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
-        visible="c.visible" geodesic="c.geodesic" clickable="c.clickable" control="c.control">
-    </ui-gmap-circle>
-  </ui-gmap-google-map>
-
-</div>
-
-<div ng-cntroller="FindtrucksController" ng-init="getTrucks()">
-	<div class="container" flex="40" ng-repeat="truck in trucks | orderBy:'distance'" layout-align="center" >
-	  <div ng-click="hiddenDiv = !hiddenDiv; showHours(truck.locations)">
-      <md-card >
-        <md-media-md>
-   	    <div class="md-media-md caxrd-media">
-   	      <img ng-src={{truck.image}} class = "md-card-image" style="width:140px">
-   	    </div>
-        </md-media-md>
-<md-card-content style="margin-auto">
-<div class="md-subhead"><b>{{truck.name}}</b></div>
-<div><font size= "2">{{truck.distance}} miles from you!<font/></div>
-
-<!-- <div ng-show="hiddenDiv">
-  <div><b>{{day}}</b> from <b>{{hours}}</b></div>
-  <div>{{truck.currentAddress}}</div>
-  <div><font size="2">{{truck.cuisine}}</font></div>
-</div> -->
-<!-- 
-</md-card-content>
-</md-card>
- -->

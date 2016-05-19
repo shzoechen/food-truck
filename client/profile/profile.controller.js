@@ -1,6 +1,13 @@
 angular.module('finder.profile', [])
 
 .controller('ProfileController', function($scope, $window, $state, Profiledata) {
+    $scope.isLoggedIn = localStorage.getItem('token') ? true : false;
+
+    $scope.logout = function() {
+    localStorage.removeItem('token');
+    $state.go('trucks');
+    }
+
     $scope.getProfile = function() {
         Profiledata.get()
         .then(function(data) {

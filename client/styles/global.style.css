@@ -10,9 +10,14 @@ HEADER
   margin: auto;
 }
 
-.header-button {
-  margin: auto;
-  height: 40px;
+.header .header-button {
+  margin: 25px 2px 25px 10px;
+  height: 30px;
+}
+
+.header .search {
+  min-width: 20px;
+  padding: 2px;
 }
 
 .inputBox {

@@ -1,0 +1,10 @@
+<!-- header -->
+<md-toolbar class="header">
+  <div layout="row">
+  <a ui-sref="trucks" id="logo"><h2>Truhks</h2></a>
+  <span flex></span>
+  <md-button class="md-raised header-button" ui-sref= "signin" ng-if="!isLoggedIn">Sign In</md-button>
+  <md-button class="md-raised header-button" ng-click="logout()" ng-if="isLoggedIn">Log Out</md-button>
+
+  </div>
+</md-toolbar>

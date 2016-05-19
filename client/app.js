@@ -4,6 +4,7 @@ angular.module('finder', [
   'finder.profile',
   'finder.editProfile',
   'finder.trucks',
+  'finder.truck',
   'auth.service',
   'profile.service',
   'truck.service',
@@ -41,6 +42,12 @@ angular.module('finder', [
             url: '/trucks',
             templateUrl: 'trucks/findtrucks.html',
             controller: 'FindtrucksController'
+        })
+
+        .state('truck', {
+            url: '/truck/:username',
+            templateUrl: 'trucks/truck.html',
+            controller: 'TruckController'
         })
 
         .state('editProfile', {
