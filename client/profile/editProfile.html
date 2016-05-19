@@ -1,0 +1,198 @@
+<div style="width: 80%; margin: auto">
+	<md-content layout-padding>
+		<h2>Edit Your Profile</h2>
+	</md-content>
+	<div layout="column" ng-cloak class="md-inline-form">
+	  <md-content layout-padding>
+	    <div>
+	      <form name="userForm">
+	        <div layout-gt-xs="row">
+	          <md-input-container class="md-block" flex-gt-xs>
+	            <label>Give your food truck an impressive name!</label>
+	            <input ng-model="name">
+	          </md-input-container>
+	        </div>
+	        <div layout-gt-xs="row">
+		        <md-input-container flex="50" >
+	            <label>Tell us your cuisine type!</label>
+	            <md-select ng-model="cuisine">
+	              <md-option ng-repeat="c in cuisineTypes" value="{{c}}">
+	                {{c}}
+	              </md-option>
+	            </md-select>
+		        </md-input-container>
+		        <div layout="column" layout-margin>
+		        	<p>Upload one of your food truck picture here!</p>
+		        	<p><input id="fileInput" type="file"></p>
+		        </div>
+	        </div>
+	      </form>
+	    </div>
+		</md-content> 
+
+
+		<h4>Tell us your locations and hours, so people can find your turck!</h4>
+		<!-- display added location -->
+		<div layout-padding ng-if="locations.length > 0" ng-repeat="loc in locations">
+			<p>Address: {{loc.address}}</p>
+			<div layout="column">
+				<p ng-if="loc.hours['1'][0] != null">Mon: {{loc.hours["1"][0]}} - {{loc.hours["1"][1]}}</p>
+				<p ng-if="loc.hours['2'][0] != null">Tue: {{loc.hours["2"][0]}} - {{loc.hours["2"][1]}}</p>
+				<p ng-if="loc.hours['3'][0] != null">Wed: {{loc.hours["3"][0]}} - {{loc.hours["3"][1]}}</p>
+				<p ng-if="loc.hours['4'][0] != null">Thu: {{loc.hours["4"][0]}} - {{loc.hours["4"][1]}}</p>
+				<p ng-if="loc.hours['5'][0] != null">Thu: {{loc.hours["5"][0]}} - {{loc.hours["5"][1]}}</p>
+				<p ng-if="loc.hours['6'][0] != null">Thu: {{loc.hours["6"][0]}} - {{loc.hours["6"][1]}}</p>
+				<p ng-if="loc.hours['0'][0] != null">Thu: {{loc.hours["0"][0]}} - {{loc.hours["0"][1]}}</p>
+			</div>
+		</div>
+
+		<!-- add location form -->
+		<div layout-padding>
+			<md-button ng-show="!addLocation" ng-click="addLocation = ! addLocation">Add Location</md-button>
+			<!-- add location box -->
+			<div ng-show="addLocation">
+				<md-input-container class="md-block">
+				  <label>Address</label>
+				  <input ng-model="location.address">
+				  <div>{{address}}</div>
+				</md-input-container>
+				<!-- add hours -->
+				<div layout-gt-xs="rows">
+					<span style="padding-right: 20px">Mon:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start1">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end1">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+					<span style="padding-right: 20px">Tue:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start2">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end2">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+					<span style="padding-right: 20px">Wed:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start3">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end3">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+					<span style="padding-right: 20px">Thu:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start4">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end4">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+				</div>
+				<div layout-gt-xs="rows">
+
+					<span style="padding-right: 20px">Fri:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start5">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end5">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+					<span style="padding-right: 20px">Sat:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start6">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end6">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+
+					<span style="padding-right: 20px">Sun:</span>
+					<md-input-container>
+	        	<label>start</label>
+	        <md-select ng-model="start0">
+	          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+					<md-input-container>
+		      <label>end</label>
+		        <md-select ng-model="end0">
+		          <md-option ng-repeat="time in timeList" value="{{time}}">
+		            {{time}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+				</div>
+					<md-button ng-click="editLocation()">Add A Location</md-button>
+					<md-button ng-click="addLocation = ! addLocation">Cancel</md-button>	
+				</div> <!--end hours -->
+			</div> <!-- end location box -->
+		</div>
+		<!-- <md-button>Add a business location and working hours</md-button> -->
+		<md-button ng-click="submitProfile()">Submit your profile</md-button>
+	</div>
+</div>

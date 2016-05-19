@@ -1,0 +1,199 @@
+/*************
+HEADER
+**************/
+.header {
+  background-color: orange;
+}
+
+.header div {
+  width: 78%;
+  margin: auto;
+}
+
+.header-button {
+  margin: auto;
+  height: 40px;
+}
+
+.inputBox {
+  margin: auto;
+  display: inline-block;
+  width: 50%;
+  height: 40px;
+  border-radius: 5px;
+}
+
+/*************
+Main Content
+**************/
+.main {
+  margin: auto;
+}
+
+.portfolio {
+  border-top: 1px solid orange;
+  border-bottom: 1px solid orange;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 150px;
+}
+
+.truck-image {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+/** {
+  list-style: none;
+  box-sizing: border-box;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  width:100%;
+  padding:0;
+  margin:auto;
+
+
+}*/
+
+/*[truck]*/
+/*** trucks--> trucks.controller--> menu header ***/
+.menu {
+  font-size: 2rem;
+  display: flex;;
+  flex-flow: row wrap;
+  background-color: rgba(163, 160, 160, 0.45);
+
+  margin: 1%;
+}
+
+.main-header {
+  flex: none;
+  padding: .5%;
+  background-color: #00ced1;
+  color: white;
+  text-align: center;
+  margin: .5%;
+}
+
+.main-header one {
+  margin-right: auto;
+
+}
+
+/*** trucks--> trucks.controller--> ng-repeat trucklist div ***/
+/*
+.wrap {
+  float: left;
+  display: block;
+}
+
+ul.wrap,  ul.wrap>li {
+  list-style-type: none;
+  margin: 3px;
+  padding: 0;
+}
+*/
+
+/*[profile]*/
+/*** profile--> profile.controller--> menu header ***/
+.good {
+  line-height: 30px;
+  padding-left: 10px;
+  margin: 10px;
+    box-sizing:border-box;
+    background-color: rgba(0, 128, 0, 0.31);
+}
+
+
+
+.cover{
+  background-color: #EBEBEB;
+
+  .fullname{
+    margin-bottom: 3px;
+    margin-top: 0px;
+  }
+  .username{
+    margin-bottom:5px;
+  }
+}
+
+message md-chips{
+  margin: auto;
+  .md-chips{
+    box-shadow: none;
+  }
+}
+
+message div.md-list-item-text.compact{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.md-list-item-text.compact .message-content{
+  background-color: #F5F5F5;
+  border-color: #F5F5F5;
+  padding: 10px;
+  margin: 0px;
+  position: relative;
+}
+
+message {
+  margin-bottom: 10px;
+}
+message:not(.repeated-author) .message-content:before{
+  left: -8px;
+  border-width: 0 8px 8px 0 !important;
+  border-right-color: inherit;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-bottom-color: transparent;
+}
+
+message:not(.repeated-author) md-list-item{
+  margin-top: 20px;
+}
+.repeated-author{
+  img.message-avatar {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.repeated-author p, .repeated-author small {
+  display: none;
+}
+
+message .md-avatar.message-avatar{
+  margin-bottom: 0px;
+}
+
+message md-list-item.contact-item{
+  min-height: 0;
+}
+
+
+
+
+.login-frame img, .registration-frame img {
+  width: 30%;
+  margin: auto;
+}
+
+.login-frame md-card, .registration-frame md-card {
+  max-width: 400px;
+  margin: auto;
+}
+
+.full-height {
+  height: 100%;
+  box-sizing: border-box;
+}

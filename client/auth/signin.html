@@ -1,0 +1,53 @@
+<!--<div id='signin'>-->
+  <!--<h1>Sign In</h1>-->
+  <!--<form name="signinForm" ng-submit='signin()'>-->
+    <!--<input type='text'ng-model='user.username'>-->
+    <!--<input type="password" ng-model='user.password'>-->
+    <!--<button>signin</button>-->
+  <!--</form>-->
+  <!--<a href="#/signup">Don't have an account? <strong>Signup</strong></a>-->
+<!--</div>-->
+
+
+<div class = "login-frame" layout="row" flex="" layout-padding="" layout-fill="" layout-align="center center" class="ng-scope">
+  <div flex="40" flex-lg="50" flex-md="70" flex-sm="100">
+
+<md-card class="md-cyan-theme">
+  <md-toolbar class="md-cyan-theme" layout-padding>
+    <div layout="column" layout-align="center" class="padding-20 text-center">
+      <h1 layout="row" layout-align="center center" class="md-headline ng-scope" translate="">Login</h1>
+    </div>
+  </md-toolbar>
+
+
+<md-content layout-padding>
+  <form name ="siginForm" ng-submit="signin()">
+
+    <md-input-container flex layout layout="column">
+      <label>Username</label>
+      <input type = text ng-model="user.username" required name="username">
+    </md-input-container>
+
+    <md-input-container layout layout="column">
+      <label>Password</label>
+      <input type = "password" ng-model="user.password" required name="password">
+    </md-input-container>
+
+  <div class="md-actions" layout="column" layout-align="center">
+    <md-button class="md-raised md-primary" layout="row" layout-align="center center" ng-click="signin()">Login</md-button>
+  </div>
+
+  </form>
+
+<span layout-align="center center">Don't have an account?<a ui-sref="signup">SIGN UP</a>
+</span>
+  </md-content>
+
+
+
+  </md-card>
+
+</div>
+</div>
+
+
