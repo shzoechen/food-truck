@@ -202,14 +202,41 @@ module.exports.findTrucks = function(request, response) {
 };
 
 module.exports.findTruck = function(request, response) {
-	console.log('findTruck')
-	var name = request.body.name;
-	User.findOne({name: name}, function(err, user) {
+	var id = request.body.id;
+	var longitude = request.body.longitude;
+	var latitude = request.body.latitude;
+
+	User.findOne({id: id}, function(err, user) {
 		if(err) {
 			console.error('err', err);
 		} else {
-			console.log('find truck', user)
-			response.status(201).send(user);
+			var date = new Date();
+			var day = date.getDay();
+			var time = date.getHours();
+
+			for(var j = 0; j < user.locations.length; j++) {
+				//check if user is working today
+				if(!user.locations[j].hours[day]) {
+					continue;
+				}
+				//check if user is working within current hour
+				if(user.locations[j].hours[day][0] <= time && user.locations[j].hours[day][1] >= time) {
+					//get geolocation of the truck
+					thisLongitude = user.locations[j].longitude;
+					thisLatitude = user.locations[j].latitude;
+					//calculate distance between user and this truck
+					var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
+					//sending current address information to the client
+					var copy = JSON.parse(JSON.stringify(user));
+					copy.currentAddress = user.locations[j].address;
+					copy.currentLongitude = user.locations[j].longitude;
+					copy.currentLatitude = user.locations[j].latitude;
+					copy.distance = distance;
+					copy.hour = [user.locations[j].hours[day][0], user.locations[j].hours[day][1]];
+					console.log("user", copy);
+				}
+			}
+			response.status(201).send(copy);
 		}
 	});
 };

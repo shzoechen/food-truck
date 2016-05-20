@@ -1,0 +1,35 @@
+<div ng-include src="'../layout/header.html'"></div>
+
+<md-content layout="column" flex="80" class="main" layout-padding>
+	<!-- truck info and today's info -->
+	<div layout="row">
+		<div flex="60" >
+			<h1>{{truck.name}} <star-rating ng-model="rating" readonly=true></star-rating></h1>
+			<p>Cuisine: {{truck.cuisine}}</p>
+			<p>Today: {{truck.hour[0]}}:00 - {{truck.hour[1]}}:00</p>
+			<p>Address: {{truck.currentAddress}}</p>
+		</div>
+		<div flex="40">
+			<img src="{{truck.image}}" class="truck-image large">
+		</div>
+	</div>
+
+	<!-- address and hours detail -->
+	<p>Details</p>
+	<div>
+		<div ng-repeat="location in truck.locations" class="details">
+			<p>{{location.address}}</p>
+			<p>Hours:</p>
+			<p ng-if="location.hours['1'][0] != null">Mon: {{location.hours["1"][0]}}:00 - {{location.hours["1"][1]}}:00</p>
+			<p ng-if="location.hours['2'][0] != null">Tue: {{location.hours["2"][0]}}:00 - {{location.hours["2"][1]}}:00</p>
+			<p ng-if="location.hours['3'][0] != null">Wed: {{location.hours["3"][0]}}:00 - {{location.hours["3"][1]}}:00</p>
+			<p ng-if="location.hours['4'][0] != null">Thu: {{location.hours["4"][0]}}:00 - {{location.hours["4"][1]}}:00</p>
+			<p ng-if="location.hours['5'][0] != null">Thu: {{location.hours["5"][0]}}:00 - {{location.hours["5"][1]}}:00</p>
+			<p ng-if="location.hours['6'][0] != null">Thu: {{location.hours["6"][0]}}:00 - {{location.hours["6"][1]}}:00</p>
+			<p ng-if="location.hours['0'][0] != null">Thu: {{location.hours["0"][0]}}:00 - {{location.hours["0"][1]}}:00</p>
+		</div>
+	</div>
+</md-content>
+
+
+

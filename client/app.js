@@ -8,6 +8,7 @@ angular.module('finder', [
   'auth.service',
   'profile.service',
   'truck.service',
+  'finder.starRating',
   'ui.router',
   'ngMdIcons'
 ])
@@ -45,7 +46,7 @@ angular.module('finder', [
         })
 
         .state('truck', {
-            url: '/truck/:username',
+            url: '/truck/:id',
             templateUrl: 'trucks/truck.html',
             controller: 'TruckController'
         })

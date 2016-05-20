@@ -1,13 +1,13 @@
 angular.module('finder.auth', ['ngMaterial'])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $state, Auth) {
 
   $scope.signin = function () {
     Auth.signin($scope.user)
       .then(function (token) {
         console.log("token in signin", token.data.token);
         $window.localStorage.setItem('token', token.data.token);
-        $location.path('/profile');
+        $state.go('/profile');
       })
       .catch(function (error) {
         console.error(error);
@@ -19,7 +19,7 @@ angular.module('finder.auth', ['ngMaterial'])
       .then(function (token) {
         console.log("token in signup", token.data)
         $window.localStorage.setItem('token', token.data.token);
-        $location.path('/profile');
+        $state.go('profile');
       })
       .catch(function (error) {
         console.error(error);

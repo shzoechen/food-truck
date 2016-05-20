@@ -1,6 +1,18 @@
-angular.module('finder.truck', [])
+angular.module('finder.truck', ['finder.starRating'])
 
-.controller('TruckController', function ($scope, $stateParams, $state) {
-	console.log('.params', $state.params)
-	console.log('in TruckController', $stateParams.username)
+.controller('TruckController', function ($scope, $stateParams, Truckdata) {
+	// get truck info
+	var coordinates = localStorage.getItem('coordinates').split(',');
+console.log('coordinates', typeof coordinates)
+	Truckdata.getTruck($stateParams.id, Number(coordinates[0]), Number(coordinates[1]))
+	.then(function(data) {
+		$scope.truck = data.data;
+		console.log($scope.truck)
+	})
+
+	//rating system
+	$scope.rating = 5;
+
+
+
 });

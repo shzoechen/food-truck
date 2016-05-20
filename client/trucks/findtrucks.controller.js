@@ -72,6 +72,7 @@ $scope.hiddenDiv = false;
     navigator.geolocation.getCurrentPosition(function(position){
     	latitude = position.coords.latitude;
     	longitude = position.coords.longitude;
+      localStorage.setItem('coordinates', [longitude, latitude]);
       cb(longitude, latitude)
       .then(function(resp){
           $scope.trucks = resp;

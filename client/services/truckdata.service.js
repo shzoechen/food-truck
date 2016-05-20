@@ -15,16 +15,8 @@ angular.module('truck.service',[])
     })
   }
 
-  var getTruck = function(name) {
-    console.log('truckname', name)
-    return $http({
-      method: 'POST',
-      url: '/findTruck',
-      data: {name: name}
-    })
-    .then(function(resp){
-      return resp.data;
-    });
+  var getTruck = function(id, longitude, latitude) {
+    return $http.post('/findTruck', {id: id, longitude: longitude, latitude: latitude});
   }
  
   return {

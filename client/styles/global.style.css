@@ -28,6 +28,10 @@ HEADER
   border-radius: 5px;
 }
 
+.header img {
+  width: 70px;
+}
+
 /*************
 Main Content
 **************/
@@ -38,8 +42,7 @@ Main Content
 .portfolio {
   border-top: 1px solid orange;
   border-bottom: 1px solid orange;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 0;
   height: 150px;
 }
 
@@ -50,19 +53,48 @@ Main Content
   border-radius: 4px;
 }
 
-/** {
-  list-style: none;
-  box-sizing: border-box;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.truck-image.large{
+  width: 220px;
+  height: 220px;
 }
 
-body {
-  width:100%;
-  padding:0;
-  margin:auto;
+
+/*************
+Truck Page
+**************/
+.details {
+  border-top: 1px solid orange;
+  border-bottom: 1px solid orange;
+  padding: 10px 0;
+}
 
 
-}*/
+/*************
+Rating System
+**************/
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.star-rating .star {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.star-rating .star.filled {
+  color: #fd0;
+}
+
+
+
+
+
 
 /*[truck]*/
 /*** trucks--> trucks.controller--> menu header ***/
@@ -89,22 +121,7 @@ body {
 
 }
 
-/*** trucks--> trucks.controller--> ng-repeat trucklist div ***/
-/*
-.wrap {
-  float: left;
-  display: block;
-}
 
-ul.wrap,  ul.wrap>li {
-  list-style-type: none;
-  margin: 3px;
-  padding: 0;
-}
-*/
-
-/*[profile]*/
-/*** profile--> profile.controller--> menu header ***/
 .good {
   line-height: 30px;
   padding-left: 10px;

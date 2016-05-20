@@ -9,13 +9,7 @@ router.use(parser.json());
 router.use(parser.urlencoded({ extended: true }));
 
 
-var mongoose = require('mongoose');
-var url = require('./config.js').url;
-mongoose.connect(url);
-var db = mongoose.connection;
-//One Time Only, to import init data
-// var saveInitData = require('./initData.js');
-// saveInitData();
+
 
 router.post('/signup', function(request, response) {
 

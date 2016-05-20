@@ -1,8 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
+var url = require('./config.js').url;
+mongoose.connect(url);
+var db = mongoose.connection;
+//One Time Only, to import init data
+// var saveInitData = require('./initData.js');
+// saveInitData();
+
+autoIncrement.initialize(db);
+
 
 var LocationSchema = new Schema();
-
 LocationSchema.add({
 	address: String,
 	longitude: Number,
@@ -20,5 +29,11 @@ var UserSchema = new Schema({
 });
 
 
+UserSchema.plugin(autoIncrement.plugin, {
+    model: 'User',
+    field: 'id',
+    startAt: 100,
+    incrementBy: 1
+});
 
 module.exports = mongoose.model('User', UserSchema);
