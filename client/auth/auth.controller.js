@@ -7,7 +7,7 @@ angular.module('finder.auth', ['ngMaterial'])
       .then(function (token) {
         console.log("token in signin", token.data.token);
         $window.localStorage.setItem('token', token.data.token);
-        $state.go('/profile');
+        $state.go('profile');
       })
       .catch(function (error) {
         console.error(error);

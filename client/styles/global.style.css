@@ -1,17 +1,28 @@
 /*************
+GENERAL
+**************/
+body {
+  font-size: 16px;
+  color: #333;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/*************
 HEADER
 **************/
 .header {
   background-color: orange;
+  height: 90px;
+  position: relative;
 }
 
 .header div {
   width: 78%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .header .header-button {
-  margin: 25px 2px 25px 10px;
+  margin: 27px 2px 23px 10px;
   height: 30px;
 }
 
@@ -21,15 +32,22 @@ HEADER
 }
 
 .inputBox {
-  margin: auto;
+  margin: 25px auto;
   display: inline-block;
   width: 50%;
   height: 40px;
   border-radius: 5px;
 }
 
-.header img {
-  width: 70px;
+.header a {
+  height: 55px;
+}
+
+#logo {
+  height: 55px;
+  display: inline-block;
+  position: absolute;
+  top: 18px;
 }
 
 /*************
@@ -41,9 +59,9 @@ Main Content
 
 .portfolio {
   border-top: 1px solid orange;
-  border-bottom: 1px solid orange;
-  padding: 20px 0;
   height: 150px;
+  border-collapse: collapse;
+
 }
 
 .truck-image {
@@ -51,6 +69,7 @@ Main Content
   height: 100px;
   display: inline-block;
   border-radius: 4px;
+  margin: 20px 0;
 }
 
 .truck-image.large{
@@ -58,16 +77,41 @@ Main Content
   height: 220px;
 }
 
+.truck-info {
+  margin: 0 20px;
+}
+
+.warning {
+  font-size: 1.6em;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.warning img {
+  width: 100px;
+}
 
 /*************
 Truck Page
 **************/
 .details {
   border-top: 1px solid orange;
-  border-bottom: 1px solid orange;
   padding: 10px 0;
 }
 
+.info {
+  min-height: 270px;
+}
+
+.main > p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6em;
+}
+
+.label {
+  width: 10%;
+}
 
 /*************
 Rating System

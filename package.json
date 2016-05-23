@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Team-LA/food-truck-finder"
+    "url": "https://www.truhks.com"
   },
   "license": "MIT",
   "bugs": {
@@ -23,8 +23,6 @@
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.1.1",
     "q": "^1.4.1",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
     "request": "^2.71.0"
   }
 }

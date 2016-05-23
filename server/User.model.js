@@ -16,7 +16,7 @@ LocationSchema.add({
 	address: String,
 	longitude: Number,
 	latitude: Number,
-	hours: {}
+	hours: {} //hours:[{Mon: [8, 17]}] 
 });
 
 var UserSchema = new Schema({
@@ -25,7 +25,7 @@ var UserSchema = new Schema({
 	password: String,
 	image: String,
 	cuisine: String,
-	locations: [LocationSchema] //hours:[{Mon: [8, 17]}] 
+	locations: [LocationSchema] 
 });
 
 

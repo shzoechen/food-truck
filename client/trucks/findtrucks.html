@@ -1,15 +1,19 @@
 <div ng-include src="'../layout/header.html'"></div>
 
-<md-content layout="row" flex="80" class="main" layout-padding>
+<div layout="row" flex="80" class="main" layout-padding>
 
   <!-- trucks portfolio -->
   <div flex="60" class="main-box">
-    <div layout="row" ng-repeat="truck in trucks" class="portfolio">
-      <div flex="20">
-        <a ui-sref="truck({id: {{truck.id}} })"><img src="{{truck.image}}" class="truck-image"></a>
-      </div>
-      <div>
-        <p>{{truck.name}}</p>
+    <!-- if no trucks data -->
+    <div class="warning" ng-if="!trucks" ng-cloak>
+      <img src="../assets/gif.gif">
+      <p>Wait, we are searching for food trucks near you!</p>
+    </div>
+    <!-- if get trucks data -->
+    <div layout="row" ng-repeat="truck in trucks | orderBy: 'distance'" class="portfolio">
+      <a ui-sref="truck({id: {{truck.id}} })"><img src="{{truck.image}}" class="truck-image"></a>
+      <div class="truck-info">
+        <p><a ui-sref="truck({id: {{truck.id}} })">{{truck.name}}</a></p>
         <p>{{truck.currentAddress}}</p>
         <p>
           <ng-md-icon icon="location_on" size="16px"></ng-md-icon>
@@ -29,5 +33,5 @@
       </ui-gmap-circle>
     </ui-gmap-google-map>
   </md-content>
-</md-content>
+</div>
 
