@@ -6,14 +6,14 @@ var https = require('https');
 var Q = require("q");
 
 
-module.exports.userSignup = function(username, password, response) {
+module.exports.userSignup = function(username, password, res) {
 
 	User.findOne({username: username}, function(err, user) {
 		if(err) {
 			console.error('error', err);
-			response.status(500).send("Server error.")
+			res.status(500).send("Server error.")
 		} else {
-			//if user does not exists
+			//if user does not exists, save to db
 			if(user === null) {
 				var hash = bcrypt.hashSync(password);
 				var user = new User({
@@ -24,16 +24,14 @@ module.exports.userSignup = function(username, password, response) {
 				user.save(function(err, user) {
 					if(err) {
 						console.error('error', err);
-						response.status(500).send("Server error.")
-
-					} else {
-						console.log("user is added.")
-						createToken(response, user.id);
-						//response.status(201).send("User added.");
-					}
+						res.status(500).send("Server error.")
+					} 
+					createToken(res, user.id);
+					res.status(201).send("User added.");
 				})
 			} else {
-				response.status(409).send("User exists.");
+				//if user exists
+				res.status(409).send("User exists.");
 			}
 
 		}
@@ -41,170 +39,173 @@ module.exports.userSignup = function(username, password, response) {
 
 };
 
-module.exports.userLogin = function(username, password, response) {
+module.exports.userLogin = function(username, password, res) {
 
 	User.findOne({username: username}, function(err, user) {
 		if(err) {
 			console.error('error', err);
-			response.status(500).send("Server error.")
-		} else {
+			res.status(500).send("Server error.")
+		} 
+		if(user) {
 			//if user does exist
-			if(user) {
-				//if password matches
-				bcrypt.compare(password, user.password, function(err, result) {
-				  if (err) {
-				    console.error(err);
-				    response.status(500).send('Server error.');
-				  } else if (result) {
-				    // Log user in
-				    console.log('user.id', user.id)
-				    createToken(response, user.id);
-				  } else {
-				    // Password mismatch
-				    response.status(401).send("Wrong password.");
-				  }
-				});
-			} else {
-				response.status(401).send("User does not exist.");
-			}
+			bcrypt.compare(password, user.password, function(err, result) {
+			  if (err) {
+			    console.error(err);
+			    res.status(500).send('Server error.');
+			  } 
+
+			  if (result) {
+			    // if password matches, log user in
+			    createToken(res, user.id);
+			  } else {
+			    // Password mismatch
+			    res.status(401).send("Wrong password.");
+			  }
+			});
+		} else {
+			//if user does not exist
+			res.status(401).send("User does not exist.");
 		}
 	})
 };
 
-module.exports.getProfile = function(request, response) {
-	var id = request.id;
+module.exports.getProfile = function(req, res) {
+
+	var id = req.id;
+
 	User.findById(id, function(err, user) {
 		if(err) {
-			response.status(500).send("server error.");
-		} else {
-			response.status(200).send(user);
-		}
+			console.error(err);
+			res.status(500).send("server error.");
+		} 
+		res.status(200).send(user);
 	})
 };
 
-module.exports.profile = function(request, response) {
+module.exports.postProfile = function(req, res) {
 
-	var id = request.id;
+	var id = req.id;
 
 	//find the user in database
 	User.findById(id, function (err, user) {
 		if (err) {
-			response.status(500).send("Server error.")
-		} else {
-		 	user.name = request.body.name;
-		  user.cuisine = request.body.cuisine;
-		  user.locations = request.body.locations;
+			res.status(500).send("Server error.")
+		} 
 
-			var index = 0;
-			promiseWhile(function () { return index < locations.length; }, function () {
-				sendRequest(locations[index].address)
-				.then(function(res){
-						user.locations[index].longitude = res.longitude;
-						user.locations[index].latitude = res.latitude;
-						index++;
-					});
-				return Q.delay(300); // arbitrary async
-			}).then(function () {
-				//save user to the database
-				user.save(function (err) {
-					if (err) {
-						response.status(500).send("Server error about database.")
-					} else {
-						response.status(201).send(user);
-					}
+	 	user.name = req.body.name;
+	  user.cuisine = req.body.cuisine;
+	  user.locations = req.body.locations;
+
+	  //get coordinates of all locations from google api
+		var index = 0;
+		promiseWhile(function () { return index < locations.length; }, function () {
+			getCoordinates(locations[index].address)
+			.then(function(res){
+					user.locations[index].longitude = res.longitude;
+					user.locations[index].latitude = res.latitude;
+					index++;
 				});
-			}).done();
-		}
+			return Q.delay(300); // arbitrary async
+		}).then(function () {
+			//save user to the database
+			user.save(function (err) {
+				if (err) {
+					res.status(500).send("Server error about database.")
+				} else {
+					res.status(201).send(user);
+				}
+			});
+		}).done();
 
 	});
 };
 
-module.exports.editProfile = function(request, response) {
-	var id = request.id;
+module.exports.editProfile = function(req, res) {
+
+	var id = req.id;
 
 	//find the user in database
 	User.findById(id, function (err, user) {
 		if (err) {
-			response.status(500).send("Server error.")
-		} else {
-		 	user.name = request.body.name;
-		  user.cuisine = request.body.cuisine;
-		  user.locations = request.body.locations;
-
-			var index = 0;
-			promiseWhile(function () { return index < user.locations.length; }, function () {
-				sendRequest(user.locations[index].address)
-				.then(function(res){
-						user.locations[index].longitude = res.longitude;
-						user.locations[index].latitude = res.latitude;
-						index++;
-					});
-				return Q.delay(300); // arbitrary async
-			}).then(function () {
-				//save user to the database
-				user.save(function (err) {
-					if (err) {
-						response.status(500).send("Server error about database.")
-					} else {
-						response.status(201).send(user);
-					}
-				});
-			}).done();
+			res.status(500).send("Server error.")
 		}
+
+	 	user.name = req.body.name;
+	  user.cuisine = req.body.cuisine;
+	  user.locations = req.body.locations;
+
+		var index = 0;
+		promiseWhile(function () { return index < user.locations.length; }, function () {
+			getCoordinates(user.locations[index].address)
+			.then(function(res){
+					user.locations[index].longitude = res.longitude;
+					user.locations[index].latitude = res.latitude;
+					index++;
+				});
+			return Q.delay(300); // arbitrary async
+		}).then(function () {
+			//save user to the database
+			user.save(function (err) {
+				if (err) {
+					res.status(500).send("Server error about database.")
+				} else {
+					res.status(201).send(user);
+				}
+			});
+		}).done();
 
 	});
 }
 
-module.exports.findTrucks = function(request, response) {
+module.exports.findTrucks = function(req, res) {
+
 	var date = new Date();
 	var day = date.getDay();
 	var time = date.getHours();
 
-	// var address = request.body.address;
-	var longitude = request.body.longitude;
-	var latitude = request.body.latitude;
+	// var address = req.body.address;
+	var longitude = req.body.longitude;
+	var latitude = req.body.latitude;
 
-//	sendRequest(address).then(function(res) {
-		User.find({}, function(err, users) {
-			if(err) {
-				console.error('err', err);
-			} else {
-				var trucks = [];
-				//looping through all the users
-				for(var i = 0; i < users.length; i++) {
-					//looping through all the locations of every user
-					for(var j = 0; j < users[i].locations.length; j++) {
-						//check if user is working today
-						if(!users[i].locations[j].hours[day]) {
-							continue;
-						}
-						//check if user is working within current hour
-						if(users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
-							//get geolocation of the truck
-							thisLongitude = users[i].locations[j].longitude;
-							thisLatitude = users[i].locations[j].latitude;
-							//calculate distance between user and this truck
-							var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
-							//sending current address information to the client
-							var copy = JSON.parse(JSON.stringify(users[i]));
-							copy.currentAddress = users[i].locations[j].address;
-							copy.currentLongitude = users[i].locations[j].longitude;
-							copy.currentLatitude = users[i].locations[j].latitude;
-							copy.distance = distance;
-							console.log("distance", copy.distance);
-							trucks.push(copy);
-						}
+	User.find({}, function(err, users) {
+		if(err) {
+			console.error('err', err);
+		} else {
+			var trucks = [];
+			//looping through all the users
+			for(var i = 0; i < users.length; i++) {
+				//looping through all the locations of every user
+				for(var j = 0; j < users[i].locations.length; j++) {
+					//check if user is working today
+					if(!users[i].locations[j].hours[day]) {
+						continue;
+					}
+					//check if user is working within current hour
+					if(users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
+						//get geolocation of the truck
+						thisLongitude = users[i].locations[j].longitude;
+						thisLatitude = users[i].locations[j].latitude;
+						//calculate distance between user and this truck
+						var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
+						//sending current address information to the client
+						var copy = JSON.parse(JSON.stringify(users[i]));
+						copy.currentAddress = users[i].locations[j].address;
+						copy.currentLongitude = users[i].locations[j].longitude;
+						copy.currentLatitude = users[i].locations[j].latitude;
+						copy.distance = distance;
+						trucks.push(copy);
 					}
 				}
-				response.status(201).send(trucks);
 			}
-		});
+			res.status(201).send(trucks);
+		}
+	});
 };
 
-module.exports.findTruck = function(request, response) {
-	var id = request.body.id;
-	var longitude = request.body.longitude;
-	var latitude = request.body.latitude;
+module.exports.findTruck = function(req, res) {
+	var id = req.body.id;
+	var longitude = req.body.longitude;
+	var latitude = req.body.latitude;
 
 	User.findOne({id: id}, function(err, user) {
 		if(err) {
@@ -233,35 +234,32 @@ module.exports.findTruck = function(request, response) {
 					copy.currentLatitude = user.locations[j].latitude;
 					copy.distance = distance;
 					copy.hour = [user.locations[j].hours[day][0], user.locations[j].hours[day][1]];
-					console.log("user", copy);
 				}
 			}
-			response.status(201).send(copy);
+			res.status(201).send(copy);
 		}
 	});
 };
 
-module.exports.createToken = createToken = function(response, id) {
+module.exports.createToken = createToken = function(res, id) {
 
 	var payload = {id: id};
 	var secret = require('./config.js').tokenSecret;
 	var token = jwt.encode(payload, secret);
-	console.log("in createToken")
-	response.set('token', token).status(201).json({token: token});
+	res.set('token', token).status(201).json({token: token});
 };
 
-module.exports.verifyToken = verifyToken = function(request, response, next) {
+module.exports.verifyToken = verifyToken = function(req, res, next) {
 
-	var secret = "mksgreenfieldproject";
-	var token = (request.body && request.body.access_token) || (request.query && request.query.access_token) || request.headers['x-access-token'];
+	var secret = require('./config.js').tokenSecret;
+	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
 	if(token) {
-		console.log('has token')
     	var decodedToken = jwt.decode(token, secret);
     	var id = decodedToken.id;
-    	request.id = id;
+    	req.id = id;
     	next();
 	} else {
-		response.status(401).send("Not authorized.")
+		res.status(401).send("Not authorized.")
 	}
 };
 
@@ -276,7 +274,7 @@ var getDistance = function(lat1, lon1, lat2, lon2) {
     return Math.round(12742 * Math.asin(Math.sqrt(a))/1.60932*10)/10;
   }
 
-var sendRequest = function(address) {
+var getCoordinates = function(address) {
 
 	var APIkey = require('./config.js').googleAPIkey;
 	var query = "https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=" + APIkey;

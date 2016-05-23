@@ -12,7 +12,4 @@ angular.module('finder.truck', ['finder.starRating'])
 
 	//rating system
 	$scope.rating = 5;
-
-
-
 });
