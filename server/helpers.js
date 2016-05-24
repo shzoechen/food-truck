@@ -72,8 +72,9 @@ module.exports.userLogin = function(username, password, res) {
 module.exports.getProfile = function(req, res) {
 
 	var id = req.id;
+	console.log('id', req.id)
 
-	User.findById(id, function(err, user) {
+	User.findOne({id: id}, function(err, user) {
 		if(err) {
 			console.error(err);
 			res.status(500).send("server error.");
@@ -91,7 +92,6 @@ module.exports.postProfile = function(req, res) {
 		if (err) {
 			res.status(500).send("Server error.")
 		} 
-
 	 	user.name = req.body.name;
 	  user.cuisine = req.body.cuisine;
 	  user.locations = req.body.locations;
@@ -125,11 +125,11 @@ module.exports.editProfile = function(req, res) {
 	var id = req.id;
 
 	//find the user in database
-	User.findById(id, function (err, user) {
+	User.findOne({id: id}, function (err, user) {
 		if (err) {
 			res.status(500).send("Server error.")
 		}
-
+		console.log('user', user)
 	 	user.name = req.body.name;
 	  user.cuisine = req.body.cuisine;
 	  user.locations = req.body.locations;
@@ -277,7 +277,7 @@ var getDistance = function(lat1, lon1, lat2, lon2) {
 var getCoordinates = function(address) {
 
 	var APIkey = require('./config.js').googleAPIkey;
-	var query = "https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=" + APIkey;
+	var query = "https://maps-api-ssl.google.com/maps/api/geocode/json?address="+ address +"&key=" + APIkey;
 
 	return new Promise(function(resolve, reject) {
 		https.get(query, function(res) {

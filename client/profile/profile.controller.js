@@ -11,7 +11,7 @@ angular.module('finder.profile', [])
     $scope.getProfile = function() {
         Profiledata.get()
         .then(function(data) {
-            console.log('user back', data.data.locations)
+            console.log('data in profile controller line 14', data.data)
             $scope.user = data.data
         });
     }

@@ -116,7 +116,6 @@ $scope.hiddenDiv = false;
     .then(function(truck) {
       $scope.trucks = [];
       $scope.trucks.push(truck);
-      console.log('$scope.trucks', $scope.trucks)
     });
   }
 
