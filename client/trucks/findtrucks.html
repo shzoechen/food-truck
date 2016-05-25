@@ -7,7 +7,7 @@
     <!-- if no trucks data -->
     <div class="warning" ng-if="!trucks" ng-cloak>
       <img src="../assets/gif.gif">
-      <p>Wait, we are searching for food trucks near you!</p>
+      <p class="wait">Wait, we are searching for food trucks near you!</p>
     </div>
     <!-- if get trucks data -->
     <div layout="row" ng-repeat="truck in trucks | orderBy: 'distance'" class="portfolio">

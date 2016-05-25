@@ -1,35 +1,46 @@
+<!-- include header -->
 <div ng-include src="'../layout/headernoinput.html'"></div>
 
+<div layout="column" flex="80" class="main" layout-padding>
+	<!-- if no profile yet -->
+	<div class="no-profile" ng-if="!truck.name" class="ng-cloak">
+		<p>Your truck does not have profile yet!</p>
+		<p><md-button class="md-raised edit-profile-button md-primary" ui-sref= "editProfile">Start</md-button></p>
+	</div>
+	<!-- truck profile-->
+	<div ng-if="truck.name">
+		<div layout="row" class="info">
+			<div flex="60" >
+				<h2>My Profile</h2>
+				<p>Name: {{truck.name}}</p>
+				<p>Rating:  <star-rating ng-model="rating" readonly=true></star-rating></p>
+				<p>Cuisine: {{truck.cuisine}}</p>
+			</div>
+			<div flex="40">
+				<img src="{{truck.image}}" class="truck-image large">
+			</div>
+		</div>
 
-<div id="profile">
-	<p>
-		<span class="property">Name:</span>
-		<span class="value">{{user.name}}</span>
-	</p>
-	<p>
-		<span class="property">Photo:</span>
-		<span class="value"><img src="{{user.image}}"></span>
-	</p>
-	<p>
-		<span class="property">Cuisine Type:</span>
-		<span class="value">{{user.cuisine}}</span>
-	</p>
-	<p>
-		<span class="property">Hours:</span>
-		<span class="value">
-			<ul>
-				<li ng-repeat="location in user.locations">
-					<p>Address: {{location.address}}</p>
-					<p>Hours:</p>
-					<p ng-if="location.hours['1'][0] != null">Mon: {{location.hours["1"][0]}} - {{location.hours["1"][1]}}</p>
-					<p ng-if="location.hours['2'][0] != null">Tue: {{location.hours["2"][0]}} - {{location.hours["2"][1]}}</p>
-					<p ng-if="location.hours['3'][0] != null">Wed: {{location.hours["3"][0]}} - {{location.hours["3"][1]}}</p>
-					<p ng-if="location.hours['4'][0] != null">Thu: {{location.hours["4"][0]}} - {{location.hours["4"][1]}}</p>
-					<p ng-if="location.hours['5'][0] != null">Fri: {{location.hours["5"][0]}} - {{location.hours["5"][1]}}</p>
-					<p ng-if="location.hours['6'][0] != null">Sat: {{location.hours["6"][0]}} - {{location.hours["6"][1]}}</p>
-					<p ng-if="location.hours['0'][0] != null">Sun: {{location.hours["0"][0]}} - {{location.hours["0"][1]}}</p>
-				</li>
-			</ul>
-		</span>
-	</p>
-<button ng-click="logout()">Log Out</button>
+		<!-- address and hours detail -->
+		<p>Details</p>
+		<div ng-repeat="location in truck.locations" class="details">
+			<div layout="row">
+				<p flex="10">Address:</p>
+				<p>{{location.address}}</p>
+			</div>
+			<div layout="row">
+				<p flex="10">Hours:</p>
+				<div>
+					<p ng-if="location.hours['1'][0] != null">Mon: {{location.hours["1"][0]}}:00 - {{location.hours["1"][1]}}:00</p>
+					<p ng-if="location.hours['2'][0] != null">Tue: {{location.hours["2"][0]}}:00 - {{location.hours["2"][1]}}:00</p>
+					<p ng-if="location.hours['3'][0] != null">Wed: {{location.hours["3"][0]}}:00 - {{location.hours["3"][1]}}:00</p>
+					<p ng-if="location.hours['4'][0] != null">Thu: {{location.hours["4"][0]}}:00 - {{location.hours["4"][1]}}:00</p>
+					<p ng-if="location.hours['5'][0] != null">Thu: {{location.hours["5"][0]}}:00 - {{location.hours["5"][1]}}:00</p>
+					<p ng-if="location.hours['6'][0] != null">Thu: {{location.hours["6"][0]}}:00 - {{location.hours["6"][1]}}:00</p>
+					<p ng-if="location.hours['0'][0] != null">Thu: {{location.hours["0"][0]}}:00 - {{location.hours["0"][1]}}:00</p>
+				</div>
+			</div>
+		</div>
+		<md-button class="md-raised edit-profile-button md-primary" ui-sref= "editProfile">Edit Profile</md-button>
+	</div>
+</div>

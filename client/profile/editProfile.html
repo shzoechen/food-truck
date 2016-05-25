@@ -25,7 +25,7 @@
 		        </md-input-container>
 		        <div layout="column" layout-margin>
 		        	<p>Upload one of your food truck picture here!</p>
-		        	<p><input id="fileInput" type="file"></p>
+		        	<p><input id="fileInput" type="file" file-model = "myFile"></p>
 		        </div>
 	        </div>
 	      </form>
@@ -38,13 +38,13 @@
 		<div layout-padding ng-if="locations.length > 0" ng-repeat="loc in locations">
 			<p>Address: {{loc.address}}</p>
 			<div layout="column">
-				<p ng-if="loc.hours['1'][0] != null">Mon: {{loc.hours["1"][0]}} - {{loc.hours["1"][1]}}</p>
-				<p ng-if="loc.hours['2'][0] != null">Tue: {{loc.hours["2"][0]}} - {{loc.hours["2"][1]}}</p>
-				<p ng-if="loc.hours['3'][0] != null">Wed: {{loc.hours["3"][0]}} - {{loc.hours["3"][1]}}</p>
-				<p ng-if="loc.hours['4'][0] != null">Thu: {{loc.hours["4"][0]}} - {{loc.hours["4"][1]}}</p>
-				<p ng-if="loc.hours['5'][0] != null">Thu: {{loc.hours["5"][0]}} - {{loc.hours["5"][1]}}</p>
-				<p ng-if="loc.hours['6'][0] != null">Thu: {{loc.hours["6"][0]}} - {{loc.hours["6"][1]}}</p>
-				<p ng-if="loc.hours['0'][0] != null">Thu: {{loc.hours["0"][0]}} - {{loc.hours["0"][1]}}</p>
+				<p ng-if="loc.hours['1'][0] != null">Mon: {{loc.hours["1"][0]}}:00 - {{loc.hours["1"][1]}}:00</p>
+				<p ng-if="loc.hours['2'][0] != null">Tue: {{loc.hours["2"][0]}}:00 - {{loc.hours["2"][1]}}:00</p>
+				<p ng-if="loc.hours['3'][0] != null">Wed: {{loc.hours["3"][0]}}:00 - {{loc.hours["3"][1]}}:00</p>
+				<p ng-if="loc.hours['4'][0] != null">Thu: {{loc.hours["4"][0]}}:00 - {{loc.hours["4"][1]}}:00</p>
+				<p ng-if="loc.hours['5'][0] != null">Thu: {{loc.hours["5"][0]}}:00 - {{loc.hours["5"][1]}}:00</p>
+				<p ng-if="loc.hours['6'][0] != null">Thu: {{loc.hours["6"][0]}}:00 - {{loc.hours["6"][1]}}:00</p>
+				<p ng-if="loc.hours['0'][0] != null">Thu: {{loc.hours["0"][0]}}:00 - {{loc.hours["0"][1]}}:00</p>
 			</div>
 		</div>
 
@@ -63,17 +63,17 @@
 					<span style="padding-right: 20px">Mon:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start1">
+	        <md-select ng-model="hours.start1">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end1">
+		        <md-select ng-model="hours.end1">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -81,17 +81,17 @@
 					<span style="padding-right: 20px">Tue:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start2">
+	        <md-select ng-model="hours.start2">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end2">
+		        <md-select ng-model="hours.end2">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -99,17 +99,17 @@
 					<span style="padding-right: 20px">Wed:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start3">
+	        <md-select ng-model="hours.start3">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end3">
+		        <md-select ng-model="hours.end3">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -117,17 +117,17 @@
 					<span style="padding-right: 20px">Thu:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start4">
+	        <md-select ng-model="hours.start4">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end4">
+		        <md-select ng-model="hours.end4">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -138,17 +138,17 @@
 					<span style="padding-right: 20px">Fri:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start5">
+	        <md-select ng-model="hours.start5">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end5">
+		        <md-select ng-model="hours.end5">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -156,17 +156,17 @@
 					<span style="padding-right: 20px">Sat:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start6">
+	        <md-select ng-model="hours.start6">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end6">
+		        <md-select ng-model="hours.end6">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
@@ -174,22 +174,22 @@
 					<span style="padding-right: 20px">Sun:</span>
 					<md-input-container>
 	        	<label>start</label>
-	        <md-select ng-model="start0">
+	        <md-select ng-model="hours.start0">
 	          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 					<md-input-container>
 		      <label>end</label>
-		        <md-select ng-model="end0">
+		        <md-select ng-model="hours.end0">
 		          <md-option ng-repeat="time in timeList" value="{{time}}">
-		            {{time}}
+		            {{time}}:00
 		          </md-option>
 		        </md-select>
 					</md-input-container>
 				</div>
-					<md-button ng-click="editLocation()">Add A Location</md-button>
+					<md-button ng-click="editLocation()">Add This Location</md-button>
 					<md-button ng-click="addLocation = ! addLocation">Cancel</md-button>	
 				</div> <!--end hours -->
 			</div> <!-- end location box -->

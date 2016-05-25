@@ -1,4 +1,4 @@
-angular.module('finder.profile', [])
+angular.module('finder.profile', ['finder.starRating'])
 
 .controller('ProfileController', function($scope, $window, $state, Profiledata) {
     $scope.isLoggedIn = localStorage.getItem('token') ? true : false;
@@ -12,7 +12,7 @@ angular.module('finder.profile', [])
         Profiledata.get()
         .then(function(data) {
             console.log('data in profile controller line 14', data.data)
-            $scope.user = data.data
+            $scope.truck = data.data
         });
     }
 
@@ -20,6 +20,9 @@ angular.module('finder.profile', [])
         $window.localStorage.removeItem('token');
         $state.go('trucks');
     }
+    
+    //rating system
+    $scope.rating = 5;
 
     $scope.getProfile();
 });

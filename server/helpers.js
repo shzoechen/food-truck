@@ -129,10 +129,10 @@ module.exports.editProfile = function(req, res) {
 		if (err) {
 			res.status(500).send("Server error.")
 		}
-		console.log('user', user)
 	 	user.name = req.body.name;
 	  user.cuisine = req.body.cuisine;
 	  user.locations = req.body.locations;
+	  user.image = req.body.image;
 
 		var index = 0;
 		promiseWhile(function () { return index < user.locations.length; }, function () {
@@ -277,7 +277,7 @@ var getDistance = function(lat1, lon1, lat2, lon2) {
 var getCoordinates = function(address) {
 
 	var APIkey = require('./config.js').googleAPIkey;
-	var query = "https://maps-api-ssl.google.com/maps/api/geocode/json?address="+ address +"&key=" + APIkey;
+	var query = "https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=" + APIkey;
 
 	return new Promise(function(resolve, reject) {
 		https.get(query, function(res) {

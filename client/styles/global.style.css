@@ -103,14 +103,25 @@ Truck Page
   min-height: 270px;
 }
 
-.main > p {
+.wait {
   margin: 0;
   padding: 0;
-  font-size: 1.6em;
 }
 
 .label {
   width: 10%;
+}
+
+/*************
+Profile
+**************/
+.edit-profile-button {
+
+}
+
+.no-profile {
+  font-size: 1.6em;
+  text-align: center;
 }
 
 /*************
