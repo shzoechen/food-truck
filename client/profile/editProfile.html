@@ -1,11 +1,11 @@
 <div ng-include src="'../layout/headernoinput.html'"></div>
 
 <div style="width: 80%; margin: auto">
-	<md-content layout-padding>
+	<md-content>
 		<h2>Edit Your Profile</h2>
 	</md-content>
 	<div layout="column" ng-cloak class="md-inline-form">
-	  <md-content layout-padding>
+	  <md-content>
 	    <div>
 	      <form name="userForm">
 	        <div layout-gt-xs="row">
@@ -49,8 +49,7 @@
 		</div>
 
 		<!-- add location form -->
-		<div layout-padding>
-			<md-button ng-show="!addLocation" ng-click="addLocation = ! addLocation">Add Location</md-button>
+		<div>
 			<!-- add location box -->
 			<div ng-show="addLocation">
 				<md-input-container class="md-block">
@@ -189,12 +188,12 @@
 		        </md-select>
 					</md-input-container>
 				</div>
-					<md-button ng-click="editLocation()">Add This Location</md-button>
-					<md-button ng-click="addLocation = ! addLocation">Cancel</md-button>	
+					<md-button class="md-raised md-primary edit-profile-button" ng-click="editLocation()">Add This Location</md-button>
+					<md-button class="md-raised md-primary edit-profile-button" ng-click="addLocation = ! addLocation">Cancel</md-button>	
 				</div> <!--end hours -->
 			</div> <!-- end location box -->
 		</div>
-		<!-- <md-button>Add a business location and working hours</md-button> -->
-		<md-button ng-click="submitProfile()">Submit your profile</md-button>
+		<md-button class="md-raised md-primary edit-profile-button" ng-show="!addLocation" ng-click="addLocation = ! addLocation" >Add Location</md-button>
+		<md-button class="md-raised md-primary edit-profile-button" ng-show="!addLocation" ng-click="submitProfile()">Submit your profile</md-button>
 	</div>
 </div>

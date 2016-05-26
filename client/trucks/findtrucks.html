@@ -10,7 +10,7 @@
       <p class="wait">Wait, we are searching for food trucks near you!</p>
     </div>
     <!-- if get trucks data -->
-    <div layout="row" ng-repeat="truck in trucks | orderBy: 'distance'" class="portfolio">
+    <div layout="row" ng-repeat="truck in trucks | filter: search" class="portfolio">
       <a ui-sref="truck({id: {{truck.id}} })"><img src="{{truck.image}}" class="truck-image"></a>
       <div class="truck-info">
         <p><a ui-sref="truck({id: {{truck.id}} })">{{truck.name}}</a></p>
