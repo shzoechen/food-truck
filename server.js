@@ -1,9 +1,18 @@
 var express = require('express');
 var app = express();
+var httpPort = process.env.PORT || 8080;
+var httpPorts = process.env.PORT || 8081;
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
-// var parser = require('body-parser');
-// app.use(parser.json());
-// app.use(parser.urlencoded({ extended: true }));
+const options = {  
+  key: fs.readFileSync('ssl.key'),
+  cert: fs.readFileSync('ssl.crt'),
+  requestCert:        true,
+  rejectUnauthorized: false
+};
+
 
 //host static files
 app.use(express.static(__dirname + '/client/'));
@@ -13,7 +22,9 @@ var router = require('./server/routes.js');
 app.use("/", router);
 
 
-app.listen(3000, function(){
-	console.log('server is on.')
+// app.listen(port, function(){
+//   console.log('Listening on port ' + port);
+// });
 
-});
+http.createServer(app).listen(80);
+https.createServer(options, app).listen(443);
