@@ -7,6 +7,13 @@ var parser = require('body-parser');
 router.use(parser.json());
 router.use(parser.urlencoded({ extended: true }));
 
+//One Time Only, to import init data
+// var saveInitData = require('./initData.js');
+// saveInitData();
+
+
+
+
 router.post('/signup', function(req, res) {
 
 	var username = req.body.username;

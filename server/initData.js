@@ -27,7 +27,9 @@ var initData = [
 	     	"longitude": -118.4689268,
 	     "address": "2700 Pennsylvania Ave Santa Monica, CA 90404",
 	     "hours": {
-	         "2":[11,20]
+	         "2":[11,20],
+	         "3":[6,18],
+	         "5":[9,23]      
 	         }
 	     }
 	 ]
@@ -44,7 +46,8 @@ var initData = [
 	     	"longitude": -118.4838825,
 	     "address": "2612 Main St Santa Monica, CA 90405",
 	     "hours":{
-	         "1": [8,22]
+	         "1": [8,22],
+	         "5": [9,21]
 	         }
 	     },
 	     {
@@ -53,7 +56,9 @@ var initData = [
 	     "address": "2700 Pennsylvania Ave Santa Monica, CA 90404",
 	     "hours": {
 	         "3":[9,20],
-	         "0": [6,23]
+	         "2": [6,23],
+	         "4": [8,19],
+
 	         }
 	     }
 	 ]
@@ -79,7 +84,9 @@ var initData = [
 	     	"longitude": -118.4689268,
 	     "address": "2700 Pennsylvania Ave Santa Monica, CA 90404",
 	     "hours": {
-	         "2":[11,20]
+	         "2":[11,20],
+	         "3":[11,20],
+	         "5":[11,20]
 	         }
 	     }
 	 ]
@@ -96,7 +103,8 @@ var initData = [
      	 "longitude": -118.464175,
 	     "address": "1515 Abbot Kinney Blvd, Venice, CA 90291",
 	     "hours":{
-	         "1": [9,19]
+	         "1": [9,19],
+	         "5": [8,20]
 	         }
 	     },
 	     {
@@ -104,7 +112,9 @@ var initData = [
 	     	"longitude": -118.445326,
 	     "address": "1220 Midvale Ave, Los Angeles, CA 90024",
 	     "hours": {
-	         "2":[9,20]
+	         "2":[9,20],
+	         "3":[11,23],
+	         "4":[9,18]
 	         }
 	     }
 	 ]
@@ -121,7 +131,9 @@ var initData = [
      	 "longitude": -118.470261,
 	     "address": "26th St & Pennsylvania Ave, Santa Monica, CA 90404",
 	     "hours":{
-	         "1": [10,19]
+	         "1": [10,19],
+	         "3": [10,19],
+	         "5": [10,19]
 	         }
 	     },
 	     {
@@ -130,7 +142,8 @@ var initData = [
 	     "address": "Wilshire Boulevard & San Vicente Boulevard, Los Angeles, CA 90025",
 	     "hours": {
 	         "2":[11,20],
-	         "0": [6,23]
+	         "0": [6,23],
+	         "4": [6,23]
 	         }
 	     }
 	 ]
@@ -147,7 +160,8 @@ var initData = [
      	 "longitude": -118.500960,
 	     "address": "1221 Ocean Ave, Santa Monica, CA 90401",
 	     "hours":{
-	         "1": [8,20]
+	         "1": [8,20],
+	         "4": [8,20]
 	         }
 	     },
 	     {
@@ -155,7 +169,9 @@ var initData = [
 	     	"longitude": -118.488386,
 	     "address": "1547 Lincoln Blvd, Santa Monica, CA 90401",
 	     "hours": {
-	         "3":[10,18]
+	         "3":[10,18],
+	         "2":[10,18],
+	         "5":[10,18]
 	         }
 	     }
 	 ]
@@ -172,7 +188,8 @@ var initData = [
      	 "longitude": -118.452993,
 	     "address": "Ocean Park Blvd & 31st St, Santa Monica, CA 90405",
 	     "hours":{
-	         "1": [10,18]
+	         "1": [10,18],
+	         "5": [10,18]
 	         }
 	     },
 	     {
@@ -180,7 +197,8 @@ var initData = [
 	     	"longitude": -118.494099,
 	     "address": "1410 5th St, Santa Monica, CA 90401",
 	     "hours": {
-	         "2":[9,20]
+	         "2":[9,20],
+	         "4":[9,20]
 	         }
 	     }
 	 ]
@@ -515,8 +533,6 @@ var initData = [
 ];
 
 var saveInitData = function() {
-
-
 			var index = 0;
 			helpers.promiseWhile(function () { return index < initData.length; }, function () {
 				var user = new User(initData[index]);
