@@ -1,3 +1,5 @@
+'use strict';
+
 //sample data
 
 var helpers = require('./helpers');

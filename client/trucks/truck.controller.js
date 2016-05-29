@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.truck', ['finder.starRating'])
 
 .controller('TruckController', function ($scope, $stateParams, Truckdata) {

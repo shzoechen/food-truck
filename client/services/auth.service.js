@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('auth.service',[])
 
 .factory('Auth', function($http, $location, $window){

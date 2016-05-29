@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.profile', ['finder.starRating'])
 
 .controller('ProfileController', function($scope, $window, $state, Profiledata) {

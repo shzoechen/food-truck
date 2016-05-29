@@ -1,6 +1,7 @@
+'use strict';
+
 angular.module('finder', [
   'finder.auth',
-  'finder.map',
   'finder.profile',
   'finder.editProfile',
   'finder.trucks',

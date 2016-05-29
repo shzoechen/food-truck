@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.trucks', ['uiGmapgoogle-maps'])
 
 .controller('FindtrucksController', function ($scope, $location, Truckdata, $state) {

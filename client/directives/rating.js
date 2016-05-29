@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.starRating', [])
 
 .directive('starRating', function() {

@@ -1,4 +1,5 @@
 'use strict';
+
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var User = require('./User.model.js');
@@ -28,7 +29,6 @@ module.exports.userSignup = function(username, password, res) {
 						res.status(500).send("Server error.")
 
 					} else {
-						console.log("user is added.")
 						createToken(res, user.id);
 						//res.status(201).send("User added.");
 					}
@@ -74,7 +74,6 @@ module.exports.userLogin = function(username, password, res) {
 module.exports.getProfile = function(req, res) {
 
 	var id = req.id;
-	console.log('id', req.id)
 
 	User.findOne({id: id}, function(err, user) {
 		if(err) {
@@ -144,7 +143,7 @@ module.exports.editProfile = function(req, res) {
 					user.locations[index].latitude = res.latitude;
 					index++;
 				});
-			return Q.delay(300); // arbitrary async
+			return Q.delay(400); // arbitrary async
 		}).then(function () {
 			//save user to the database
 			user.save(function (err) {
@@ -162,8 +161,8 @@ module.exports.editProfile = function(req, res) {
 module.exports.findTrucks = function(req, res) {
 
 	var date = new Date();
-	var day = 5//date.getDay();
-	var time = 11//date.getHours();
+	var day = date.getDay();
+	var time = date.getHours();
 
 	// var address = req.body.address;
 	var longitude = req.body.longitude;
@@ -185,10 +184,7 @@ module.exports.findTrucks = function(req, res) {
 						continue;
 					}
 
-					// trucks.push(users[i].locations[j].hours[day][0] !== null);
-					// trucks.push('users[i].locations[j].hours[day]', users[i].locations[j].hours[day]);
-					// trucks.push('users[i].locations[j].hours[day][0]', users[i].locations[j].hours[day][0]);
-
+					
 					//check if user is working within current hour
 					if(users[i].locations[j].hours[day][0] !== null && users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
 						//get geolocation of the truck
@@ -300,8 +296,8 @@ var getCoordinates = function(address) {
 				} else {
 					//get current address's longitude latitude
 					var result = JSON.parse(body);
-					longitude = result.results[0].geometry.location.lng;
-					latitude = result.results[0].geometry.location.lat;
+					var longitude = result.results[0].geometry.location.lng;
+					var latitude = result.results[0].geometry.location.lat;
 					resolve({longitude: longitude, latitude: latitude});
 				}
 			})

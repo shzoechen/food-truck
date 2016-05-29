@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.auth', ['ngMaterial'])
 
 .controller('AuthController', function ($scope, $window, $state, Auth) {

@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = require('express').Router();
 var User = require('./User.model.js'); 

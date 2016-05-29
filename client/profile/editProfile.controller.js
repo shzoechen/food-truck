@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('finder.editProfile', [])
 
 .controller('EditProfileController', function($scope, $window, $state, Profiledata) {
@@ -47,7 +49,7 @@ angular.module('finder.editProfile', [])
 
 	$scope.editLocation = function(){
 		$scope.addLocation = false;
-		loc = {
+		var loc = {
 			address: $scope.location.address,
 			hours: {
 				"1": [$scope.hours.start1, $scope.hours.end1],

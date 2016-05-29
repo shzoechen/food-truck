@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('profile.service',[])
 
 .factory('Profiledata', function($http) {
