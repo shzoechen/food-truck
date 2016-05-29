@@ -40,7 +40,7 @@ angular.module('finder.editProfile', [])
     $state.go('trucks');
   }
 
-	$scope.cuisineTypes = ['Chinese', 'American'];
+	$scope.cuisineTypes = ['Chinese', 'American', 'Italian', 'Mexican', 'Indian', 'Japanese', 'Thai', 'French', 'Vietnamese', 'Vegan', 'Caribbean'];
 	$scope.timeList = ['6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', ''];
 	$scope.addLocation = false;
 	$scope.locations = [];

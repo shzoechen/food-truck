@@ -20,6 +20,8 @@ angular.module('finder.auth', ['ngMaterial'])
         console.log("token in signup", token.data)
         $window.localStorage.setItem('token', token.data.token);
         $state.go('profile');
+                // $location.path('/profile');
+
       })
       .catch(function (error) {
         console.error(error);
