@@ -1,3 +1,4 @@
+'use strict';
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var User = require('./User.model.js');
@@ -186,8 +187,8 @@ module.exports.findTrucks = function(req, res) {
 					//check if user is working within current hour
 					if(users[i].locations[j].hours[day][0] !== null && users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
 						//get geolocation of the truck
-						thisLongitude = users[i].locations[j].longitude;
-						thisLatitude = users[i].locations[j].latitude;
+						var thisLongitude = users[i].locations[j].longitude;
+						var thisLatitude = users[i].locations[j].latitude;
 						//calculate distance between user and this truck
 						var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
 						//sending current address information to the client
@@ -226,8 +227,8 @@ module.exports.findTruck = function(req, res) {
 				//check if user is working within current hour
 				if(user.locations[j].hours[day][0] <= time && user.locations[j].hours[day][1] >= time) {
 					//get geolocation of the truck
-					thisLongitude = user.locations[j].longitude;
-					thisLatitude = user.locations[j].latitude;
+					var thisLongitude = user.locations[j].longitude;
+					var thisLatitude = user.locations[j].latitude;
 					//calculate distance between user and this truck
 					var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
 					//sending current address information to the client
@@ -244,7 +245,7 @@ module.exports.findTruck = function(req, res) {
 	});
 };
 
-module.exports.createToken = createToken = function(res, id) {
+var createToken = function(res, id) {
 
 	var payload = {id: id};
 	var secret = require('./config.js').tokenSecret;
@@ -252,7 +253,7 @@ module.exports.createToken = createToken = function(res, id) {
 	res.set('token', token).status(201).json({token: token});
 };
 
-module.exports.verifyToken = verifyToken = function(req, res, next) {
+var verifyToken = function(req, res, next) {
 
 	var secret = require('./config.js').tokenSecret;
 	var token = (req.body && req.body.access_token) || (req.query && req.query.access_token) || req.headers['x-access-token'];
@@ -306,7 +307,7 @@ var getCoordinates = function(address) {
 // `condition` is a function that returns a boolean
 // `body` is a function that returns a promise
 // returns a promise for the completion of the loop
-module.exports.promiseWhile = promiseWhile = function (condition, body) {
+var promiseWhile = function (condition, body) {
     var done = Q.defer();
 
     function loop() {
@@ -328,3 +329,6 @@ module.exports.promiseWhile = promiseWhile = function (condition, body) {
     return done.promise;
 }
 
+module.exports.createToken = createToken;
+module.exports.promiseWhile = promiseWhile;
+module.exports.verifyToken = verifyToken;
