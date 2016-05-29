@@ -12,10 +12,4 @@ var router = require('./server/routes.js');
 app.use("/", router);
 
 
-// app.listen(port, function(){
-//   console.log('Listening on port ' + port);
-// });
-
-
 http.createServer(app).listen(httpPort);
-

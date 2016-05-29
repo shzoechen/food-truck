@@ -13,7 +13,7 @@ module.exports.userSignup = function(username, password, res) {
 			console.error('error', err);
 			res.status(500).send("Server error.")
 		} else {
-			//if user does not exists, save to db
+			//if user does not exists
 			if(user === null) {
 				var hash = bcrypt.hashSync(password);
 				var user = new User({
@@ -25,18 +25,19 @@ module.exports.userSignup = function(username, password, res) {
 					if(err) {
 						console.error('error', err);
 						res.status(500).send("Server error.")
+
+					} else {
+						console.log("user is added.")
+						createToken(res, user.id);
+						//res.status(201).send("User added.");
 					}
-					createToken(res, user.id);
-					res.status(201).send("User added.");
 				})
 			} else {
-				//if user exists
 				res.status(409).send("User exists.");
 			}
 
 		}
 	})
-
 };
 
 module.exports.userLogin = function(username, password, res) {
@@ -166,6 +167,8 @@ module.exports.findTrucks = function(req, res) {
 	// var address = req.body.address;
 	var longitude = req.body.longitude;
 	var latitude = req.body.latitude;
+
+
 
 	User.find({}, function(err, users) {
 		if(err) {

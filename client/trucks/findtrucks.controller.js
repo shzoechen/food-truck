@@ -73,7 +73,7 @@ $scope.hiddenDiv = false;
     	latitude = position.coords.latitude;
     	longitude = position.coords.longitude;
       localStorage.setItem('coordinates', [longitude, latitude]);
-      console.log('get coordinates', latitude, longitude)
+      console.log('get coordinates', latitude, longitude);
       cb(longitude, latitude)
       .then(function(resp){
           $scope.trucks = resp;
