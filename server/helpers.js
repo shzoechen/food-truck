@@ -25,7 +25,7 @@ module.exports.userSignup = function(username, password, res) {
 					if(err) {
 						console.error('error', err);
 						res.status(500).send("Server error.")
-					} 
+					}
 					createToken(res, user.id);
 					res.status(201).send("User added.");
 				})
@@ -45,14 +45,14 @@ module.exports.userLogin = function(username, password, res) {
 		if(err) {
 			console.error('error', err);
 			res.status(500).send("Server error.")
-		} 
+		}
 		if(user) {
 			//if user does exist
 			bcrypt.compare(password, user.password, function(err, result) {
 			  if (err) {
 			    console.error(err);
 			    res.status(500).send('Server error.');
-			  } 
+			  }
 
 			  if (result) {
 			    // if password matches, log user in
@@ -78,7 +78,7 @@ module.exports.getProfile = function(req, res) {
 		if(err) {
 			console.error(err);
 			res.status(500).send("server error.");
-		} 
+		}
 		res.status(200).send(user);
 	})
 };
@@ -91,7 +91,7 @@ module.exports.postProfile = function(req, res) {
 	User.findById(id, function (err, user) {
 		if (err) {
 			res.status(500).send("Server error.")
-		} 
+		}
 	 	user.name = req.body.name;
 	  user.cuisine = req.body.cuisine;
 	  user.locations = req.body.locations;
@@ -160,8 +160,8 @@ module.exports.editProfile = function(req, res) {
 module.exports.findTrucks = function(req, res) {
 
 	var date = new Date();
-	var day = date.getDay();
-	var time = date.getHours();
+	var day = 5//date.getDay();
+	var time = 11//date.getHours();
 
 	// var address = req.body.address;
 	var longitude = req.body.longitude;
@@ -180,8 +180,13 @@ module.exports.findTrucks = function(req, res) {
 					if(!users[i].locations[j].hours[day]) {
 						continue;
 					}
+
+					// trucks.push(users[i].locations[j].hours[day][0] !== null);
+					// trucks.push('users[i].locations[j].hours[day]', users[i].locations[j].hours[day]);
+					// trucks.push('users[i].locations[j].hours[day][0]', users[i].locations[j].hours[day][0]);
+
 					//check if user is working within current hour
-					if(users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
+					if(users[i].locations[j].hours[day][0] !== null && users[i].locations[j].hours[day][0] <= time && users[i].locations[j].hours[day][1] >= time) {
 						//get geolocation of the truck
 						thisLongitude = users[i].locations[j].longitude;
 						thisLatitude = users[i].locations[j].latitude;
@@ -324,4 +329,3 @@ module.exports.promiseWhile = promiseWhile = function (condition, body) {
     // The promise
     return done.promise;
 }
-
