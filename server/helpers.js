@@ -192,12 +192,14 @@ module.exports.findTrucks = function(req, res) {
 						//calculate distance between user and this truck
 						var distance = getDistance(latitude, longitude, thisLatitude, thisLongitude);
 						//sending current address information to the client
-						var copy = JSON.parse(JSON.stringify(users[i]));
-						copy.currentAddress = users[i].locations[j].address;
-						copy.currentLongitude = users[i].locations[j].longitude;
-						copy.currentLatitude = users[i].locations[j].latitude;
-						copy.distance = distance;
-						trucks.push(copy);
+						if(distance < 10) {
+							var copy = JSON.parse(JSON.stringify(users[i]));
+							copy.currentAddress = users[i].locations[j].address;
+							copy.currentLongitude = users[i].locations[j].longitude;
+							copy.currentLatitude = users[i].locations[j].latitude;
+							copy.distance = distance;
+							trucks.push(copy);
+						}
 					}
 				}
 			}

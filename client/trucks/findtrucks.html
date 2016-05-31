@@ -1,5 +1,11 @@
 <div ng-include src="'../layout/header.html'"></div>
 
+<div flex="80" class="main">
+  <md-button class="md-raised header-button" ng-disabled="checked" ng-click="findTrucksByLoc(-118.494384, 34.019531)">Santa Monica</md-button>
+  <md-button class="md-raised header-button" ng-click="findTrucksByLoc(-118.2592727, 34.051943)">Los Angeles</md-button>
+  <md-button class="md-raised header-button" ng-click="getTrucks()">Find Food Near Me!</md-button>
+</div>
+
 <div layout="row" flex="80" class="main" layout-padding>
 
   <!-- trucks portfolio -->
@@ -7,10 +13,13 @@
     <!-- if no trucks data -->
     <div class="warning" ng-if="!trucks" ng-cloak>
       <img src="../assets/gif.gif">
-      <p class="wait">Wait, we are searching for food trucks near you!</p>
+      <p class="wait">Wait, we are searching for food trucks nearby!</p>
+    </div>
+    <div ng-show="showMsg">
+      <p class="warning">Sorry, there are no trucks near you!</p>
     </div>
     <!-- if get trucks data -->
-    <div layout="row" ng-repeat="truck in trucks | filter: search" class="portfolio">
+    <div layout="row" ng-repeat="truck in trucks | filter: search | orderBy: 'distance' " class="portfolio">
       <a ui-sref="truck({id: {{truck.id}} })"><img src="{{truck.image}}" class="truck-image"></a>
       <div class="truck-info">
         <p><a ui-sref="truck({id: {{truck.id}} })">{{truck.name}}</a></p>

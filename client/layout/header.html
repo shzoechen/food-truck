@@ -1,14 +1,14 @@
 <!-- header -->
 <md-toolbar class="header">
   <div layout="row">
-  <a ui-sref="trucks"><h2><img src="../assets/test.png" id="logo"></h2></a>
+  <a ui-sref="trucks"><img src="../assets/test.png" id="logo"></a>
   <span flex></span>
   <input class="inputBox" ng-model="search">
 
-
-  <md-button class="md-raised header-button search">
+  <md-button class="md-raised header-button search" ng-click="">
     <ng-md-icon icon="search" style="fill: black" size="30px"></ng-md-icon> 
   </md-button>
+
   <span flex></span>
 
   <md-button class="md-raised header-button" ui-sref= "signin" ng-if="!isLoggedIn">Sign In</md-button>

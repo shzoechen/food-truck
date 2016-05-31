@@ -6,6 +6,7 @@ angular.module('finder.trucks', ['uiGmapgoogle-maps'])
   var longitude;
   var latitude;
   $scope.isLoggedIn = localStorage.getItem('token') ? true : false;
+  $scope.trucks = null;
 
   $scope.logout = function() {
     localStorage.removeItem('token');
@@ -33,7 +34,7 @@ $scope.hiddenDiv = false;
       latitude: 34.052235,
       longitude: -118.243683
     },
-    zoom: 7
+    zoom: 12
   };
 
   $scope.options = {
@@ -49,7 +50,7 @@ $scope.hiddenDiv = false;
         latitude: 34.052235,
         longitude: -118.243683
       },
-      radius: 3000,
+      radius: 10000,
       stroke: {
         color: '#08B21F',
         weight: 0.9,
@@ -67,6 +68,8 @@ $scope.hiddenDiv = false;
   ];
 
   $scope.getTrucks = function() {
+    $scope.trucks = null;
+    $scope.showMsg = false;
 	  getLocation(Truckdata.getTrucks);
   };
 
@@ -78,11 +81,15 @@ $scope.hiddenDiv = false;
       console.log('get coordinates', latitude, longitude);
       cb(longitude, latitude)
       .then(function(resp){
+
+          if(resp.length === 0) {
+            $scope.showMsg = true;
+          }
           $scope.trucks = resp;
           console.log('trucks', $scope.trucks)
           $scope.map.center.longitude = longitude;
           $scope.map.center.latitude = latitude;
-          $scope.map.zoom = 12;
+          $scope.map.zoom = 10;
           $scope.circles[0].center.latitude = latitude;
           $scope.circles[0].center.longitude = longitude;
           $scope.circles[0].visible = true;
@@ -90,40 +97,37 @@ $scope.hiddenDiv = false;
 			});
     });
 	};
-	// function showHours(array){
-	// 	$scope.hours = '';
-	// 	$scope.address = '';
-	// 	$scope.day = '';
-	// 	for(var i =0; i<array.length; i++){
-	// 		for(var key in array[i]){
-	// 			if(key==="address"){
-	// 				$scope.address = array[i][key]
-	// 			}
-	// 			if( key === "hours"){
-	// 				for(var key2 in array[i][key]){
-	// 					if(key2 = "1"){
-	// 						$scope.day = "Monday";
-	// 						if(array[i][key][key2]){
-	// 							$scope.hours = array[i][key][key2][0]+"am"+ " to " +(array[i][key][key2][1]-12) +"pm"
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	};
-	// };
 
-  // $scope.searchTruck = function() {
-  //   console.log('in searchTruck')
-  //   Truckdata.getTruck($scope.truckName)
-  //   .then(function(truck) {
-  //     $scope.trucks = [];
-  //     $scope.trucks.push(truck);
-  //   });
-  // }
+
+  $scope.findTrucksByLoc = function(longitude, latitude) {
+    $scope.trucks = null;
+    $scope.showMsg = false;
+    $scope.circles[0].visible = false;
+    localStorage.setItem('coordinates', [longitude, latitude]);
+    Truckdata.getTrucks(longitude, latitude)
+    .then(function(resp) {
+      $scope.trucks = resp;
+      console.log('trucks', $scope.trucks)
+      $scope.map.center.longitude = longitude;
+      $scope.map.center.latitude = latitude;
+      $scope.map.zoom = 10;
+      $scope.circles[0].center.latitude = latitude;
+      $scope.circles[0].center.longitude = longitude;
+      $scope.circles[0].visible = false;
+      showMap(resp);
+    })
+  }
+
+  $scope.searchTruck = function() {
+    console.log('in searchTruck')
+    Truckdata.getTruck($scope.truckName)
+    .then(function(truck) {
+      $scope.trucks = [];
+      $scope.trucks.push(truck);
+    });
+  }
 
 	$scope.getLocation = getLocation;
-	// $scope.showHours = showHours;
 
-  $scope.getTrucks();
+  $scope.findTrucksByLoc(-118.494384, 34.019531);
 });
