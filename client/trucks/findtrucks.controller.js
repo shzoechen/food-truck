@@ -18,6 +18,8 @@ $scope.hiddenDiv = false;
 
 
   function showMap(dataArray) {
+    $scope.Markers = [];
+    console.log('in showMap', dataArray.length)
     for(var i = 0;i<dataArray.length;i++){
       var temp = {};
       temp.id = dataArray[i]._id;
