@@ -169,7 +169,6 @@ module.exports.findTrucks = function(req, res) {
 	var latitude = req.body.latitude;
 
 
-
 	User.find({}, function(err, users) {
 		if(err) {
 			console.error('err', err);
