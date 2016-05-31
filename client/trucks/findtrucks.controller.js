@@ -102,6 +102,7 @@ $scope.hiddenDiv = false;
 
 
   $scope.findTrucksByLoc = function(longitude, latitude) {
+    console.log('in findTrucksByLoc')
     $scope.trucks = null;
     $scope.showMsg = false;
     $scope.circles[0].visible = false;
@@ -121,12 +122,14 @@ $scope.hiddenDiv = false;
   }
 
   $scope.searchTruck = function() {
-    console.log('in searchTruck')
-    Truckdata.getTruck($scope.truckName)
+    Truckdata.searchTruck($scope.search)
     .then(function(truck) {
-      $scope.trucks = [];
-      $scope.trucks.push(truck);
+      $state.go("truck", { id: truck.data.id });
     });
+  }
+
+  $scope.reload = function() {
+    $state.reload();
   }
 
 	$scope.getLocation = getLocation;

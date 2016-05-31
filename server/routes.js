@@ -51,6 +51,8 @@ router.post('/findTrucks', helpers.findTrucks);
 
 router.post('/findTruck', helpers.findTruck);
 
+router.get('/search', helpers.search);
+
 router.get('/logout', function(req, res) {
   req.session.destroy(function(){
     res.sendStatus(200);

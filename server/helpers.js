@@ -247,6 +247,17 @@ module.exports.findTruck = function(req, res) {
 	});
 };
 
+module.exports.search = function(req, res) {
+	var name = req.headers.name;
+	User.findOne({name: name}, function(err, user){
+		if(err) {
+			console.error('err', err);
+		} else {
+			res.status(200).send(user);
+		}
+	});
+}
+
 var createToken = function(res, id) {
 
 	var payload = {id: id};

@@ -1,11 +1,11 @@
 <!-- header -->
-<md-toolbar class="header">
+<md-toolbar class="header" ng-controller="FindtrucksController">
   <div layout="row">
-  <a ui-sref="trucks"><img src="../assets/test.png" id="logo"></a>
+  <a ui-sref="trucks" ng-click="reload()"><img src="../assets/test.png" id="logo"></a>
   <span flex></span>
   <input class="inputBox" ng-model="search">
 
-  <md-button class="md-raised header-button search" ng-click="">
+  <md-button class="md-raised header-button search" ng-click="searchTruck()">
     <ng-md-icon icon="search" style="fill: black" size="30px"></ng-md-icon> 
   </md-button>
 

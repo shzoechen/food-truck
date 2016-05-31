@@ -18,11 +18,15 @@ angular.module('truck.service',[])
   var getTruck = function(id, longitude, latitude) {
     return $http.post('/findTruck', {id: id, longitude: longitude, latitude: latitude});
   }
+
+  var searchTruck = function(truck) {
+    return $http.get('/search', { headers: {name: truck} });
+  }
  
   return {
     getTrucks: getTrucks,
-    getTruck: getTruck
-
+    getTruck: getTruck,
+    searchTruck: searchTruck
   }
 
 })
