@@ -109,6 +109,9 @@ $scope.hiddenDiv = false;
     localStorage.setItem('coordinates', [longitude, latitude]);
     Truckdata.getTrucks(longitude, latitude)
     .then(function(resp) {
+      if(resp.length === 0) {
+        $scope.showMsg = true;
+      }
       $scope.trucks = resp;
       console.log('trucks', $scope.trucks)
       $scope.map.center.longitude = longitude;

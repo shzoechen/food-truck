@@ -5,6 +5,7 @@ angular.module('truck.service',[])
 .factory('Truckdata', function($http, $location, $window) {
 	
 	var getTrucks = function(longitude, latitude) {
+    console.log('long', longitude, latitude)
     return $http({
       method: 'POST',
       url: '/findTrucks',
