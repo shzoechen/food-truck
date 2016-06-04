@@ -168,7 +168,6 @@ module.exports.findTrucks = function(req, res) {
 	var longitude = req.body.longitude;
 	var latitude = req.body.latitude;
 
-
 	User.find({}, function(err, users) {
 		if(err) {
 			console.error('err', err);
@@ -342,7 +341,7 @@ var promiseWhile = function (condition, body) {
     return done.promise;
 }
 
-
 module.exports.createToken = createToken;
 module.exports.promiseWhile = promiseWhile;
 module.exports.verifyToken = verifyToken;
+
