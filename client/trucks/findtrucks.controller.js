@@ -125,10 +125,12 @@ $scope.hiddenDiv = false;
   }
 
   $scope.searchTruck = function() {
-    Truckdata.searchTruck($scope.search)
-    .then(function(truck) {
-      $state.go("truck", { id: truck.data.id });
-    });
+    if($scope.search !== "") {
+      Truckdata.searchTruck($scope.search)
+      .then(function(truck) {
+        $state.go("truck", { id: truck.data.id });
+      });
+    }
   }
 
   $scope.reload = function() {

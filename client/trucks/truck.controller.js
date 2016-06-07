@@ -12,6 +12,14 @@ angular.module('finder.truck', ['finder.starRating'])
 		console.log($scope.truck)
 	})
 
+	$scope.searchTruck = function() {
+	  if($scope.search !== "") {
+	    Truckdata.searchTruck($scope.search)
+	    .then(function(truck) {
+	      $state.go("truck", { id: truck.data.id });
+	    });
+	  }
+	}
 	
 
 	//rating system
