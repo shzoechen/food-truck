@@ -128,7 +128,12 @@ $scope.hiddenDiv = false;
     if($scope.search !== "") {
       Truckdata.searchTruck($scope.search)
       .then(function(truck) {
-        $state.go("truck", { id: truck.data.id });
+        /////////need to be fixed when there is no truck returned.
+        if(truck.data !== "") {
+          $scope.noTruck = true;
+        } else {
+          $state.go("truck", { id: truck.data.id });
+        }
       });
     }
   }

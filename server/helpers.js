@@ -251,9 +251,10 @@ module.exports.search = function(req, res) {
 	User.findOne({name: name}, function(err, user){
 		if(err) {
 			console.error('err', err);
-		} else {
+		} 
+		console.log('error', user)
 			res.status(200).send(user);
-		}
+
 	});
 }
 
